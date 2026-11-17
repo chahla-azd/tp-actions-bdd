@@ -1,0 +1,5 @@
+node_modules/
+__pycache__/
+.pytest_cache/
+java-app/target/
+php-app/vendor/
