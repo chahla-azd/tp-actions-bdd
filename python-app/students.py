@@ -9,7 +9,6 @@ def connect():
 
 
 def add_student(conn, name, grade):
-    """Ajoute un étudiant et retourne son id."""
     with conn.cursor() as cur:
         cur.execute(
             "INSERT INTO students (name, grade) VALUES (%s, %s) RETURNING id",
@@ -31,5 +30,9 @@ def get_student(conn, student_id):
 
 
 def average_grade(conn):
-    
-    raise NotImplementedError
+    with conn.cursor() as cur:
+        cur.execute("SELECT AVG(grade) FROM students")
+        avg = cur.fetchone()[0]
+    if avg is None:
+        return None
+    return float(avg)
